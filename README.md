@@ -2,6 +2,8 @@
 
 Neovim plugin that visualizes the implementations of **Go** structures, interfaces, and methods.
 
+![demo](https://github.com/user-attachments/assets/c4871997-376f-45cc-a833-0e96c3c5e731)
+
 ## ✨ Features
 
 - Visualizes interfaces with implementations
@@ -52,35 +54,35 @@ local OptsSigns = {}
 ---@class gosigns.Opts
 ---@field public signs gosigns.OptsSigns
 local defaults = {
-	-- Config for signs in left-hand column
-	signs = {
-		-- https://neovim.io/doc/user/sign.html#sign-priority
-		priority = 10,
-		-- Config for chars by object types.
-		-- To turn off the type set `nil` value
-		chars = {
-			-- Interfaces with implementations
-			interface = {
-				char = "↓",
-				hl = "Comment",
-			},
-			-- Interface methods that have implementations
-			method_elem = {
-				char = "↓",
-				hl = "Comment",
-			},
-			-- Structures that implement interfaces
-			struct = {
-				char = "↑",
-				hl = "Comment",
-			},
-			-- Structures methods that implement interface methods
-			method_declaration = {
-				char = "↑",
-				hl = "Comment",
-			},
-		},
-	},
+  -- Config for signs in left-hand column
+  signs = {
+    -- https://neovim.io/doc/user/sign.html#sign-priority
+    priority = 10,
+    -- Config for chars by object types.
+    -- To turn off the type set `nil` value
+    chars = {
+      -- Interfaces with implementations
+      interface = {
+        char = "↓",
+        hl = "Comment",
+      },
+      -- Interface methods that have implementations
+      method_elem = {
+        char = "↓",
+        hl = "Comment",
+      },
+      -- Structures that implement interfaces
+      struct = {
+        char = "↑",
+        hl = "Comment",
+      },
+      -- Structures methods that implement interface methods
+      method_declaration = {
+        char = "↑",
+        hl = "Comment",
+      },
+    },
+  },
 }
 ```
 
