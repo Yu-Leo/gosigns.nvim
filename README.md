@@ -2,7 +2,7 @@
 
 Neovim plugin that visualizes some hints for **Go**.
 
-![demo](https://github.com/user-attachments/assets/c4871997-376f-45cc-a833-0e96c3c5e731)
+![demo](https://github.com/user-attachments/assets/ec94b0cf-319b-4f96-b3c2-749f6923e5b7)
 
 ## ✨ Features
 
