@@ -53,16 +53,27 @@ M.redraw = function(bufnr)
 	local nodes = utils.find_nodes(bufnr)
 
 	for _, node in ipairs(nodes) do
-		M.process_nodes(client, node.line, node.character + 1, function(result)
-			M.process_node_callback(bufnr, node, result)
-		end)
+		if
+			node.type == "interface"
+			or node.type == "method_elem"
+			or node.type == "struct"
+			or node.type == "method_declaration"
+		then
+			M.find_impl(client, node.line, node.character + 1, function(result)
+				M.find_impl_callback(bufnr, node, result)
+			end)
+		end
+
+		if node.type == "go_comment" then
+			M.set_sign(bufnr, node)
+		end
 	end
 end
 
 --- @param bufnr integer
 --- @param node gosigns.Node
 --- @param result any
-M.process_node_callback = function(bufnr, node, result)
+M.find_impl_callback = function(bufnr, node, result)
 	if result == nil then
 		return
 	end
@@ -79,7 +90,7 @@ end
 --- @param line integer
 --- @param character integer
 --- @param callback_fn fun(result: any)
-M.process_nodes = function(client, line, character, callback_fn)
+M.find_impl = function(client, line, character, callback_fn)
 	client.request("textDocument/implementation", {
 		textDocument = vim.lsp.util.make_text_document_params(),
 		position = {
@@ -97,11 +108,11 @@ end
 --- @param bufnr integer
 --- @param node gosigns.Node
 M.set_sign = function(bufnr, node)
-	local sign = config.opts.signs.chars[node.type] or ""
+	local sign = config.opts.signs.chars[node.type]
 	vim.api.nvim_buf_set_extmark(bufnr, M.namespace, node.line, 0, {
-		id = node.line,
-		sign_text = sign.char,
-		sign_hl_group = sign.hl,
+		id = node.line + 1, -- Must be positive integer
+		sign_text = sign.char or "",
+		sign_hl_group = sign.hl or "",
 		priority = config.opts.signs.priority,
 	})
 end

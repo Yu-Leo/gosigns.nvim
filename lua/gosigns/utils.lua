@@ -61,6 +61,13 @@ M.get_ts_query = function()
     ]]
 	end
 
+	if config.opts.signs.chars["go_comment"] ~= nil then
+		query = query .. [[
+    ((comment) @go_comment
+    (#lua-match? @go_comment  "^//go:"))
+  ]]
+	end
+
 	return vim.treesitter.query.parse("go", query)
 end
 

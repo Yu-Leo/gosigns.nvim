@@ -1,15 +1,16 @@
 # gosigns.nvim
 
-Neovim plugin that visualizes the implementations of **Go** structures, interfaces, and methods.
+Neovim plugin that visualizes some hints for **Go**.
 
 ![demo](https://github.com/user-attachments/assets/c4871997-376f-45cc-a833-0e96c3c5e731)
 
 ## ✨ Features
 
-- Visualizes interfaces with implementations
-- Visualizes interface methods that have implementations
-- Visualizes structures that implement interfaces
-- Visualizes methods of structures that implement interface methods
+- Visualizes signs for interfaces with implementations
+- Visualizes signs for interface methods that have implementations
+- Visualizes signs for structures that implement interfaces
+- Visualizes signs for methods of structures that implement interface methods
+- Visualizes signs for comments starting with `go:`. See https://go.dev/doc/comment#syntax
 - Highly customizable plugin
 
 ## 📦 Installation
@@ -30,9 +31,7 @@ Install the plugin with your preferred package manager:
 ## ⚡️ Requirements
 
 - LSP with the `gopls` server
-  - for the `textDocument/implementations` request
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/) with the `go` parser installed
-    - to search for structures, interfaces, and methods
 
 ## ⚙️ Configuration
 
@@ -79,6 +78,11 @@ local defaults = {
       -- Structures methods that implement interface methods
       method_declaration = {
         char = "↑",
+        hl = "Comment",
+      },
+      -- Comments starting with `go:`. See https://go.dev/doc/comment#syntax
+      go_comment = {
+        char = "⭘",
         hl = "Comment",
       },
     },

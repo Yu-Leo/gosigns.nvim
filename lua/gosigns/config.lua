@@ -40,6 +40,11 @@ local defaults = {
 				char = "↑",
 				hl = "Comment",
 			},
+			-- Comments starting with `go:`. See https://go.dev/doc/comment#syntax
+			go_comment = {
+				char = "⭘",
+				hl = "Comment",
+			},
 		},
 	},
 }
