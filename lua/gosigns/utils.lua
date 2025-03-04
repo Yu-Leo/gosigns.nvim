@@ -14,14 +14,22 @@ M.find_nodes = function(bufnr)
 	local query = M.get_ts_query()
 	local nodes = {}
 
-	for id, node in query:iter_captures(root, 0) do
-		local type = query.captures[id]
-		local line, character = node:range()
-		table.insert(nodes, {
-			line = line,
-			character = character,
-			type = type,
-		})
+	local ok, _ = pcall(function()
+		for id, node in query:iter_captures(root, 0) do
+			local type = query.captures[id]
+			local line, character = node:range()
+			table.insert(nodes, {
+				line = line,
+				character = character,
+				type = type,
+			})
+		end
+
+		return nodes
+	end)
+
+	if not ok then
+		return {}
 	end
 
 	return nodes
