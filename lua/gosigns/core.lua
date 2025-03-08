@@ -109,12 +109,14 @@ end
 --- @param node gosigns.Node
 M.set_sign = function(bufnr, node)
 	local sign = config.opts.signs.chars[node.type]
-	vim.api.nvim_buf_set_extmark(bufnr, M.namespace, node.line, 0, {
-		id = node.line + 1, -- Must be positive integer
-		sign_text = sign.char or "",
-		sign_hl_group = sign.hl or "",
-		priority = config.opts.signs.priority,
-	})
+	pcall(function()
+		vim.api.nvim_buf_set_extmark(bufnr, M.namespace, node.line, 0, {
+			id = node.line + 1, -- Must be positive integer
+			sign_text = sign.char or "",
+			sign_hl_group = sign.hl or "",
+			priority = config.opts.signs.priority,
+		})
+	end)
 end
 
 return M
